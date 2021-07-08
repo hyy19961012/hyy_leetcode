@@ -6,10 +6,33 @@ import java.util.*;
 
 public class Solution {
     public static void main(String[] args) {
-        int[] del = {1,1,3,7,15,31,63,127,255,511};
+        int[] del = {0,0,0,0,0};
 
-        System.out.println(countPairs(del));
+        System.out.println(numSubarraysWithSum(del,0));
     }
+
+    /**
+     *930:给你一个二元数组 nums ，和一个整数 goal ，请你统计并返回有多少个和为 goal 的 非空 子数组。
+     *子数组 是数组的一段连续部分。
+     * @param nums
+     * @param goal
+     * @return
+     */
+    public static int numSubarraysWithSum(int[] nums, int goal) {
+        int[] ans = new int[30001];
+        ans[0] = 1;
+        int sum = 0;
+        int res = 0;
+        for (int i : nums) {
+            sum += i;
+            if (sum - goal >= 0) {
+                res += ans[sum - goal];
+            }
+            ans[sum]++;
+        }
+        return res;
+    }
+
     public static int countPairs(int[] deliciousness) {
         int[] arr = new int[30];
         arr[0] = 1;
